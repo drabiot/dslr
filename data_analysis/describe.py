@@ -6,11 +6,15 @@
 #    By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/24 14:22:11 by tchartie          #+#    #+#              #
-#    Updated: 2026/06/24 16:10:57 by tchartie         ###   ########.fr        #
+#    Updated: 2026/06/24 18:34:34 by tchartie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-from sys import argv
+from sys import argv, path
+path.append("..")
+path.append(".")
+path.append("./data_analysis")
+
 from pandas import read_csv, DataFrame
 from dslr_lib.functions import ft_count, ft_mean, ft_std, ft_min, ft_quantile, ft_max
 
