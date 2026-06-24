@@ -6,26 +6,26 @@
 #    By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/24 14:22:11 by tchartie          #+#    #+#              #
-#    Updated: 2026/06/24 15:45:10 by tchartie         ###   ########.fr        #
+#    Updated: 2026/06/24 16:10:57 by tchartie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 from sys import argv
 from pandas import read_csv, DataFrame
-import numpy as np
+from dslr_lib.functions import ft_count, ft_mean, ft_std, ft_min, ft_quantile, ft_max
 
 def describe(data : DataFrame):
 	numeric = data.select_dtypes(include='number').drop(columns=['Index'], errors='ignore')
 
 	stats = {
-		'count': numeric.count(),
-		'mean':  numeric.mean(),
-		'std':   numeric.std(),
-		'min':   numeric.min(),
-		'25%':   numeric.quantile(0.25),
-		'50%':   numeric.quantile(0.50),
-		'75%':   numeric.quantile(0.75),
-		'max':   numeric.max(),
+		'count': ft_count(numeric),
+		'mean':  ft_mean(numeric),
+		'std':   ft_std(numeric),
+		'min':   ft_min(numeric),
+		'25%':   ft_quantile(numeric,0.25),
+		'50%':   ft_quantile(numeric, 0.50),
+		'75%':   ft_quantile(numeric, 0.75),
+		'max':   ft_max(numeric),
 	}
 		
 	result = DataFrame(stats).T
