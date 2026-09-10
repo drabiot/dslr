@@ -7,9 +7,8 @@ sys.path.append("./data_analysis")
 
 import matplotlib.pyplot as plt  # noqa: E402
 
-from pandas import read_csv, DataFrame  # noqa: E402
+from pandas import read_csv, isna, DataFrame  # noqa: E402
 from pandas.errors import EmptyDataError, ParserError  # noqa: E402
-from dslr_lib.functions import ft_mean  # noqa: E402
 
 def histogram(data: DataFrame):
     """
@@ -25,29 +24,31 @@ def histogram(data: DataFrame):
 
     numeric = data.select_dtypes(include='number')
     numeric = numeric.drop(columns=['Index'], errors='ignore')
+    courses = numeric.columns
 
-    stats = { 'Mean':  {col: ft_mean(numeric[col].dropna().values) for col in numeric.columns} }
+    min_variance = float("inf")
+    homogeneous_course = None
 
-    result = DataFrame(stats).T
-    mean = float("inf")
-    mean_col = None
+    for col in courses:
+        house_mean = data.groupby('Hogwarts House')[col].mean()
+        current_variance = house_mean.var()
 
-    for col in result.columns:
-        val = result.loc['Mean', col]
+        if isna(current_variance):
+            continue
 
-        if abs(val) < mean:
-            mean = abs(val)
-            mean_col = col
+        if current_variance < min_variance:
+            min_variance = current_variance
+            homogeneous_course = col
 
     for house, color in house_colors.items():
-        house_data = data.loc[data['Hogwarts House'] == house, mean_col].dropna()
-        plt.hist(house_data, bins=15, alpha=0.5, label=house,
-                  color=color)
+        house_data = data.loc[data['Hogwarts House'] == house, homogeneous_course].dropna()
+        plt.hist(house_data, bins=15, alpha=0.5, label=house, color=color)
 
-    plt.title(mean_col)
-    plt.xlabel('Score')
+    plt.title(homogeneous_course)
+    plt.xlabel('Notes')
     plt.ylabel('Frequency')
     plt.legend()
+    plt.tight_layout()
     plt.show()
 
 def main():
