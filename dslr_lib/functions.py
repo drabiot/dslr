@@ -30,7 +30,7 @@ def ft_mean(values: DataFrame) -> float:
     return (sum(values) / len(values))
 
 
-def ft_mean(values: Series) -> float:
+def ft_mean_histo(values: Series) -> float:
     """
     Compute the number average of non-NaN values in the given DataFrame.
 
