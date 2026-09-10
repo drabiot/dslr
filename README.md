@@ -135,7 +135,7 @@ Take a dataset & display his pair plot.
 </div>
 
 ## Sources
-- decribe function https://www.expertpython.fr/lexique/describe()
-- matplotlib https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html
-- histogram in matplotlib https://www.w3schools.com/python/matplotlib_histograms.asp
-- pair plot in matplotlib https://www.geeksforgeeks.org/python/pairplot-in-matplotlib/
+- Describe function https://www.expertpython.fr/lexique/describe()
+- Matplotlib https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html
+- Histogram in Matplotlib https://www.w3schools.com/python/matplotlib_histograms.asp
+- Pair Plot in Matplotlib https://www.geeksforgeeks.org/python/pairplot-in-matplotlib/
