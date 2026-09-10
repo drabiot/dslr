@@ -24,22 +24,32 @@ def scatter_plot(data: DataFrame):
 
     numeric = data.select_dtypes(include='number')
     numeric = numeric.drop(columns=['Index'], errors='ignore')
-    cols = numeric.columns
 
-    for i in range(1, len(cols)):
+    corr_matrix = numeric.corr().abs()
+
+    max_corr = 0
+    best_course_1 = None
+    best_course_2 = None
+
+    cols = corr_matrix.columns
+    for i in range(len(cols)):
         for j in range(i + 1, len(cols)):
-            course_1 = cols[i]
-            course_2 = cols[j]
+            score = corr_matrix.iloc[i, j]
 
-            for house, color in house_colors.items():
-                house_data = data.loc[data['Hogwarts House'] == house].dropna()
-                plt.scatter(house_data[course_1], house_data[course_2], label=house, color=color, alpha=0.5)
+            if score > max_corr:
+                max_corr = score
+                best_course_1 = cols[i]
+                best_course_2 = cols[j]
 
-            plt.xlabel(course_1)
-            plt.ylabel(course_2)
-            plt.legend()
-            plt.tight_layout()
-            plt.show()
+    for house, color in house_colors.items():
+        house_data = data.loc[data['Hogwarts House'] == house].dropna()
+        plt.scatter(house_data[best_course_1], house_data[best_course_2], label=house, color=color, alpha=0.5)
+
+    plt.xlabel(best_course_1)
+    plt.ylabel(best_course_2)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
 
 def main():
     if len(sys.argv) != 2:
