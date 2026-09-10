@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
 
 import sys
 sys.path.append("..")
@@ -37,15 +37,15 @@ def describe(data: DataFrame) -> DataFrame:
     numeric = numeric.drop(columns=['Index'], errors='ignore')
 
     stats = {
-        'total count': {col: ft_count(numeric[col].values)
+        'Total Count': {col: ft_count(numeric[col].values)
                         for col in numeric.columns},
-        'count': {col: ft_count(numeric[col].dropna().values)
+        'Count': {col: ft_count(numeric[col].dropna().values)
                   for col in numeric.columns},
-        'mean':  {col: ft_mean(numeric[col].dropna().values)
+        'Mean':  {col: ft_mean(numeric[col].dropna().values)
                   for col in numeric.columns},
-        'std':   {col: ft_std(numeric[col].dropna().values)
+        'Std':   {col: ft_std(numeric[col].dropna().values)
                   for col in numeric.columns},
-        'min':   {col: ft_min(numeric[col].dropna().values)
+        'Min':   {col: ft_min(numeric[col].dropna().values)
                   for col in numeric.columns},
         '25%':   {col: ft_quantile(numeric[col].dropna().values, 0.25)
                   for col in numeric.columns},
@@ -53,7 +53,7 @@ def describe(data: DataFrame) -> DataFrame:
                   for col in numeric.columns},
         '75%':   {col: ft_quantile(numeric[col].dropna().values, 0.75)
                   for col in numeric.columns},
-        'max':   {col: ft_max(numeric[col].dropna().values)
+        'Max':   {col: ft_max(numeric[col].dropna().values)
                   for col in numeric.columns},
     }
 
