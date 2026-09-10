@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt  # noqa: E402
 
 from pandas import read_csv, isna, DataFrame  # noqa: E402
 from pandas.errors import EmptyDataError, ParserError  # noqa: E402
+from dslr_lib.functions import ft_mean  # noqa: E402
+    
 
 def histogram(data: DataFrame):
     """
@@ -29,7 +31,7 @@ def histogram(data: DataFrame):
     course_variances = []
 
     for col in courses:
-        house_mean = data.groupby('Hogwarts House')[col].mean()
+        house_mean = data.groupby('Hogwarts House')[col].apply(ft_mean)
         current_variance = house_mean.var()
 
         if isna(current_variance):

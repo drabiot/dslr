@@ -1,4 +1,4 @@
-from pandas import DataFrame
+from pandas import DataFrame, Series
 
 
 def ft_count(values: DataFrame) -> int:
@@ -28,6 +28,22 @@ def ft_mean(values: DataFrame) -> float:
     if (len(values) == 0):
         return (0)
     return (sum(values) / len(values))
+
+
+def ft_mean(values: Series) -> float:
+    """
+    Compute the number average of non-NaN values in the given DataFrame.
+
+    Args:
+        values    (DataFrame): DataFrame to compute
+
+    Returns:
+        float: average of the non-NaN values in the given DataFrame
+    """
+    clean_values = values.dropna()
+    if (len(clean_values) == 0):
+        return (0.0)
+    return (sum(clean_values) / len(clean_values))
 
 
 def ft_std(values: DataFrame) -> float:
