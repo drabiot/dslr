@@ -26,8 +26,7 @@ def histogram(data: DataFrame):
     numeric = numeric.drop(columns=['Index'], errors='ignore')
     courses = numeric.columns
 
-    min_variance = float("inf")
-    homogeneous_course = None
+    course_variances = []
 
     for col in courses:
         house_mean = data.groupby('Hogwarts House')[col].mean()
@@ -36,9 +35,13 @@ def histogram(data: DataFrame):
         if isna(current_variance):
             continue
 
-        if current_variance < min_variance:
-            min_variance = current_variance
-            homogeneous_course = col
+        course_variances.append((col, current_variance))
+
+        if not course_variances:
+            raise ValueError("No data to analyse")
+
+    course_variances.sort(key=lambda x: x[1])
+    homogeneous_course = course_variances[0][0]
 
     for house, color in house_colors.items():
         house_data = data.loc[data['Hogwarts House'] == house, homogeneous_course].dropna()
