@@ -41,6 +41,10 @@ def scatter_plot(data: DataFrame):
                 best_course_1 = cols[i]
                 best_course_2 = cols[j]
 
+    if best_course_1 == None or best_course_2 == None:
+        print("No Score to view the data")
+        return
+
     for house, color in house_colors.items():
         house_data = data.loc[data['Hogwarts House'] == house].dropna()
         plt.scatter(house_data[best_course_1], house_data[best_course_2], label=house, color=color, alpha=0.5)

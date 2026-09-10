@@ -42,6 +42,10 @@ def histogram(data: DataFrame):
         if not course_variances:
             raise ValueError("No data to analyse")
 
+    if course_variances == []:
+        print("No Houses to view the data")
+        return
+    
     course_variances.sort(key=lambda x: x[1])
     homogeneous_course = course_variances[0][0]
 
