@@ -102,6 +102,9 @@ Take a dataset & display an histogram of the most homogeneous score distribution
 
 The histogram need to have minimun one house entered.
 
+To find the histogram we need to answer our problem, the algorithm compute every student course's note for each house & turn into his mean score.
+Then he stock the variance of every course of each house, sort every variance & take the first one in the array to display the most homogeneous course between all four houses.
+
 ### SCATTER PLOT
 Take a dataset & display a scatter plot of the two feature that are the most similar.
 
@@ -115,6 +118,9 @@ Take a dataset & display a scatter plot of the two feature that are the most sim
 </div>
 
 The scatter plot need to have minimun one score entered.
+
+To find the scatter plot we need to answer our problem, the algorithm loop to check every not checked course combo.
+Then he extracts the correlation value between course 1 and course 2. If the new correction value is higher, modify course value by the new one & so on.
 
 ### PAIR PLOT
 Take a dataset & display his pair plot.
