@@ -141,3 +141,4 @@ Take a dataset & display his pair plot.
 - Pair Plot in Matplotlib https://www.geeksforgeeks.org/python/pairplot-in-matplotlib/
 - Multiclass logistic regression One-vs-rest explanation https://youtu.be/EYXSve6T5BU
 - Create One-vs-rest algo https://youtu.be/3lwicUTEgHs
+- Step by step linear regression creation https://utkuufuk.com/2018/06/03/one-vs-all-classification/

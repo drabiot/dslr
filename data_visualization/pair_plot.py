@@ -3,7 +3,7 @@
 import sys
 sys.path.append("..")
 sys.path.append(".")
-sys.path.append("./data_analysis")
+sys.path.append("./data_visualization")
 
 import matplotlib.pyplot as plt  # noqa: E402
 import textwrap  as tw # noqa: E402
