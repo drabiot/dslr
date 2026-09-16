@@ -71,7 +71,7 @@ def pair_plot(data: DataFrame):
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: ./describe.py <file.csv>")
+        print("Usage: ./pair_plot.py <file.csv>")
         return (1)
     try:
         data: DataFrame = read_csv(sys.argv[1])
