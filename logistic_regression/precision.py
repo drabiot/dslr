@@ -4,42 +4,25 @@ import sys
 sys.path.append("..")
 sys.path.append(".")
 sys.path.append("./logistic_regression")
+from datetime import datetime
 
 from pandas import read_csv, DataFrame, Series  # noqa: E402
 from math import exp, log
 from pandas.errors import EmptyDataError, ParserError  # noqa: E402
 
-def sigmoid(z):
-    if isinstance(z, Series):
-        return (z.apply(lambda x: 1 / (1 + exp(-x))))
-    return (1 / (1 + exp(-z)))
 
-def predict(data: DataFrame, weight: DataFrame):
-    feature = ["Herbology","Defense Against the Dark Arts","Divination","Ancient Runes","History of Magic"]
-
-    X = data[feature].copy()
-    X = X.fillna(X.mean())
-
-    X = (X - X.mean()) / X.std()
-    X.insert(0, 'Intercept', 1.0)
-
-    scores = X.dot(weight)
-    probabilities = scores.apply(sigmoid)
-    best_houses = probabilities.idxmax(axis=1)
-
-    house_df = DataFrame({"Hogwarts House": best_houses}, index=data.index)
-    house_df.index.name = "Index"
-
-    house_df.to_csv("houses.csv")
+def precision(base: DataFrame, prediction: DataFrame):
+    precision = (base["Hogwarts House"] == prediction["Hogwarts House"]).sum()
+    print((precision * 100) / len(base), "% accuracy")
 
 def main():
     if len(sys.argv) != 3:
-        print("Usage: ./logreg_predict.py <file.csv> <weight.csv>")
+        print("Usage: ./precision.py <file.csv> house.csv")
         return (1)
     try:
-        data: DataFrame = read_csv(sys.argv[1])
-        weight: DataFrame = read_csv(sys.argv[2], index_col=0)
-        predict(data, weight)
+        base: DataFrame = read_csv(sys.argv[1])
+        prediction: DataFrame = read_csv(sys.argv[2], index_col=0)
+        precision(base, prediction)
     except FileNotFoundError:
         print("File " + sys.argv[1] + " don't exist")
         return (1)
